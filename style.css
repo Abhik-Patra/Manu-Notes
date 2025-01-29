@@ -1,9 +1,10 @@
 :root {
     --primary-color: #2A2A72;
     --secondary-color: #009FFD;
-    --accent-color: #FFA400;
-    --light-color: #F4F4F4;
+    --accent-color: #08b48c;
+    --light-color: #a7a7a6dd;
     --dark-color: #232528;
+    --gradient-angle: 135deg;
 }
 
 * {
@@ -14,21 +15,74 @@
 }
 
 body {
-    background: linear-gradient(135deg, var(--light-color) 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #b0b0b0 0%, #e0e0e0 100%);
     min-height: 100vh;
+    line-height: 1.6;
+    backdrop-filter: blur(10px);
 }
+
 
 .hero {
     text-align: center;
-    padding: 4rem 2rem;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    padding: 5rem 2rem 3rem;
+    background: linear-gradient(var(--gradient-angle), var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
-    margin-bottom: 2rem;
+    margin: 2rem auto;
+    width: 90vw; /* Almost full width of the viewport */
+    max-width: 1200px; /* Limit max width for large screens */
+    border-radius: 20px; /* More rounded corners for a card effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    pointer-events: none; /* Makes it non-interactive */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    filter: blur(30px);
+    pointer-events: none; /* Ensure the decorative element remains non-interactive */
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3), -3px -3px 5px rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+    pointer-events: none; /* Prevent text interaction */
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* Add these to your hero section HTML */
+.hero .blob:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+    background: rgba(42, 42, 114, 0.1);
+}
+
+.hero .blob:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    bottom: -100px;
+    right: -100px;
+    background: rgba(0, 159, 253, 0.1);
 }
 
 .subject-grid,
@@ -37,113 +91,149 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1400px;
+    margin: 2rem auto;
 }
 
 .card {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95); /* More opaque background */
+    border-radius: 20px;
+    padding: 1.2rem 1.7rem;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     text-decoration: none;
     color: var(--dark-color);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(42, 42, 114, 0.1); /* More visible border */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); /* Stronger shadow */
+    backdrop-filter: blur(10px); /* Adds glass effect */
 }
 
 .card h2 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    font-weight: 700; /* Bolder text */
+    font-size: 1.5rem;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.05); /* Text depth */
+}
+
+.card p {
+    color: #444; /* Darker text for better contrast */
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02); /* Enhanced hover effect */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 1); /* Solid background on hover */
+    border-color: var(--accent-color);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1)); /* Icon shadow */
+}
+
+/* Add gradient border effect */
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover::after {
+    opacity: 0.3;
 }
 
 @media (max-width: 768px) {
-
+    .hero {
+        padding: 4rem 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
     .subject-grid,
     .class-grid {
         grid-template-columns: 1fr;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
+        padding: 1.5rem;
     }
 }
 
-/* Telegram Link */
-
+/* Enhanced Telegram Link */
 .telegram-pulse {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 8px;
+    right: 25px;
     display: flex;
     align-items: center;
-    padding: 12px 20px;
-    background: #0088cc;
+    padding: 12px 21px;
+    background: linear-gradient(135deg, #0088cc, #00aced);
     color: white;
-    border-radius: 30px;
+    border-radius: 35px;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 136, 204, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 9999;
-    gap: 10px;
+    gap: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .telegram-pulse:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
 }
 
 .doubt-text {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    animation: pulse 1.5s infinite;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: float 2.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 .telegram-pulse svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     fill: white;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
 }
 
-/* Optional: Add a ring pulse effect */
-.telegram-pulse::before {
-    content: '';
+/* Background Blobs Animation */
+.blob {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    background: rgba(255, 164, 0, 0.1);
     border-radius: 50%;
-    background: rgba(0, 136, 204, 0.4);
-    animation: ring 1.5s infinite;
+    filter: blur(40px);
     z-index: -1;
+    animation: blob-move 20s infinite alternate;
 }
 
-@keyframes ring {
-    0% {
-        transform: scale(0.9);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
+@keyframes blob-move {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(100px, 50px) scale(1.2); }
+    100% { transform: translate(-50px, -30px) scale(0.8); }
 }
