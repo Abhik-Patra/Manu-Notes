@@ -15,8 +15,10 @@
 }
 
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #b0b0b0 0%, #e0e0e0 100%);
     min-height: 100vh;
+    line-height: 1.6;
+    backdrop-filter: blur(10px);
 }
 
 
