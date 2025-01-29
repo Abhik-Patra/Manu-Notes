@@ -182,11 +182,11 @@ body {
 /* Enhanced Telegram Link */
 .telegram-pulse {
     position: fixed;
-    bottom: 7px;
+    bottom: 12px;
     right: 25px;
     display: flex;
     align-items: center;
-    padding: 12px 21px;
+    padding: 6px 12px;
     background: linear-gradient(135deg, #0088cc, #00aced);
     color: white;
     border-radius: 35px;
@@ -205,7 +205,7 @@ body {
 
 .doubt-text {
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.5px;
     animation: float 2.5s ease-in-out infinite;
 }
