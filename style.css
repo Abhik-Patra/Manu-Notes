@@ -182,7 +182,7 @@ body {
 /* Enhanced Telegram Link */
 .telegram-pulse {
     position: fixed;
-    bottom: 8px;
+    bottom: 3px;
     right: 25px;
     display: flex;
     align-items: center;
